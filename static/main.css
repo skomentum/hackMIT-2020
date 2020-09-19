@@ -1,15 +1,10 @@
-h1,h2,h3 {
-    border: 2px #eee solid;
-    color: brown;
+.title {
     text-align: center;
     padding: 10px;
     font-family: "Libre Baskerville";
 }
-
-p {
-    font-family: "Lato";
-}
 body {
     background: rgb(156,133,171);
     background: linear-gradient(90deg, rgba(156,133,171,1) 0%, rgba(255,171,171,1) 50%, rgba(255,228,189,1) 100%);
+    font-family: "Lato";
 }
