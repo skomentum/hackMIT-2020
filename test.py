@@ -15,14 +15,9 @@ def cade():
     }
 
 
-@app.route("/lizzie")
-def hello_world():
-    return "Hi my name is Lizzie with an E!"
-
-
 @app.route('/')
 def login():
-    return render_template('index.html',cade="status")
+    return render_template('index.html')
 
 
 if __name__ == "__main__":        # on running python app.py
