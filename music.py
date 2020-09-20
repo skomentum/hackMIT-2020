@@ -35,7 +35,6 @@ for n in range(len(stars)):
     # shifts values over 1.44 so that the min is 0 and the max is 22.44
     brightness = float(starList[n][0]) + 1.44
     # Generate a sine tone with frequency 200 * n
-    print(stars[n])
     gen = Sine(notesList[stars[n]])
     # AudioSegment with duration 200ms, gain -3
     sine = gen.to_audio_segment(duration=200).apply_gain(-3)
