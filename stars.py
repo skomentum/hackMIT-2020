@@ -42,13 +42,13 @@ def get_stars(zip_code, date_utc) -> list:
     :param date_utc:  current time in UTC
     :return:          returns a df of the bright stars
     """
+
     load = api.Loader('./tmp/data')
 
     manhattan_beach = api.Topos('33.881519 S', '118.388177 W')      # TODO change location
 
     ephemeris = load('de421.bsp')   # download JPL ephemeris
     earth = ephemeris['earth']
-
 
     with load.open(data.hipparcos.URL) as f:
         df = data.hipparcos.load_dataframe(f)
@@ -58,7 +58,7 @@ def get_stars(zip_code, date_utc) -> list:
     ts = load.timescale()
     t = ts.utc(2020, 12, 20)                         # TODO set the date here
 
-    df = df[df['ra_degrees'].notnull()]
+    df = df[df['ra_degrees'].notnull()]         # remove nulls values
     bright = df[df['magnitude'] <= 5.5]                 # Prevent apparent magnitude from being greater than 5.5
     bright_stars = api.Star.from_dataframe(bright)
 
