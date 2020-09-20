@@ -1,0 +1,62 @@
+.title {
+    font-weight: bolder;
+    font-size: 60px;
+    color: #efefef;
+    font-family: "Libre Baskerville";
+}
+body {
+    background: rgb(156,133,171);
+    background: linear-gradient(90deg, rgba(156,133,171,1) 0%, rgba(255,171,171,1) 50%, rgba(255,228,189,1) 100%);
+    font-family: "Lato";
+}
+
+.nav-bar li {
+    display: inline;
+    float: left;
+}
+
+.nav-bar  {
+    width: 100%;
+    border: 1px solid black;
+}
+
+.nav-bar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.nav-bar li a {
+    display: block;
+    color: white;
+    text-align: center;
+    margin: 12px 10px;
+    /*padding: 20px 20px;*/
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+.nav-bar li a:hover {
+    background-color: #111;
+}
+
+#outer {
+    width: 100%;
+    height: 60%;
+}
+
+.position {
+    text-align: center;
+}
+
+#canvas {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+#stars {
+    width: 90% !important;
+    height: 50% !important;
+}

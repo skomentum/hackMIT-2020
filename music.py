@@ -29,6 +29,7 @@ starList = [[600, 500, 800],
             [3000, 2000, 4250],
             [2760, 4500, 2431]]
 
+
 #gets pitches array from pitches function
 stars = pitches()
 for n in range(len(stars)):
@@ -41,6 +42,7 @@ for n in range(len(stars)):
     # Fade in / out
     sine = sine.fade_in(50).fade_out(100)
     # Changes the volume based on the brightness of the star
+
     if brightness >= 0 and brightness < 1:
         sine += 60
     if brightness >= 1 and brightness < 2:
@@ -55,11 +57,10 @@ for n in range(len(stars)):
         sine -= 40
     if brightness >=6 and brightness <7:
         sine -= 60
+
     # Append the sine to our result
     result += sine
 # Play the result
 play(result)
 # save the result as an mp3 file
 result.export("test.mp3", format="mp3")
-
-
