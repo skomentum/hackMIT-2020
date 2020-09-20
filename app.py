@@ -3,22 +3,10 @@ from stars import *
 app = Flask(__name__)               # create an app instance
 
 
-# @app.route("/")                   # at the end point /
-# def index():                      # call method hello
-#     return render_template('index.html')
-
-
-@app.route("/data")
-def cade():
-    people = ["Cade", "Cole", "Katherine", "Lizzie"]
-    return {
-        "people": people
-    }
-
-
 @app.route('/')
 def login():
     return render_template('index.html')
+
 
 @app.route('/about/')
 def about():
