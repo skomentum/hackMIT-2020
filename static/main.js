@@ -3,10 +3,10 @@ window.onload = function () {
 }
 
 const starList = [
-    [40, 50],
-    [80, 120],
-    [400, 20],
-    [200, 300]
+    [0, 40, 50],
+    [22.44, 80, 120],
+    [14, 400, 20],
+    [7, 600, 300]
 ];
 
 async function drawStars() {
@@ -23,13 +23,13 @@ async function drawStars() {
         // create a star
         let star = starList[starIndex];
 
-        let radius = 10;
-        let grd = ctx.createRadialGradient(star[0], star[1], 1, star[0], star[1], radius);
+        let radius = 25; // max value of brightness
+        let grd = ctx.createRadialGradient(star[1], star[2], 1, star[1], star[2], Math.pow(radius - star[0], .75));
         grd.addColorStop(0, "white");
         grd.addColorStop(1, "black");
 
         // fill with gradient
         ctx.fillStyle = grd;
-        ctx.fillRect(star[0] - radius, star[1] - radius, 2*radius, 2*radius);
+        ctx.fillRect(star[1] - radius, star[2] - radius, 2 * radius, 2 * radius);
     }
 }

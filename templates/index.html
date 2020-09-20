@@ -9,29 +9,29 @@
     <script src="../static/main.js"></script>
 </head>
 <body>
-    <div class="nav-bar">
-        <!--    TODO: change the title! -->
-        <ul>
-            <li><span class="title">Stargazer</span></li>
-            <li><a href="/">Home</a></li>
-            <li><a href="/about/">About</a></li>
-        </ul>
+<div class="nav-bar">
+    <!--    TODO: change the title! -->
+    <ul>
+        <li><span class="title">Stargazer</span></li>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about/">About</a></li>
+    </ul>
+</div>
+
+<div id="outer">
+    <div id="inputs">
+        <form class="position">
+            <label for="zipcode">Enter your zip code:</label><br>
+            <input type="text" id="zipcode" name="zipcode" placeholder="12345"><br>
+            <label for="date">Enter your date:</label><br>
+            <input type="date" id="date" name="date"><br>
+            <input type="submit" value="Generate music">
+        </form>
     </div>
 
-    <div id="outer">
-        <div id="inputs">
-            <form class="position">
-                <label for="zipcode">Enter your zip code:</label><br>
-                <input type="text" id="zipcode" name="zipcode" placeholder="12345"><br>
-                <label for="date">Enter your date:</label><br>
-                <input type="date" id="date" name="date"><br>
-                <input type="submit" value="Generate music">
-            </form>
-        </div>
-
-        <div id="canvas">
-            <canvas id="stars" width="1600" height="900"></canvas>
-        </div>
+    <div id="canvas">
+        <canvas id="stars" width="1600" height="900"></canvas>
     </div>
+</div>
 </body>
 </html>
