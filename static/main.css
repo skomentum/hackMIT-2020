@@ -2,41 +2,66 @@
     font-weight: bolder;
     font-size: 60px;
     color: #efefef;
-    font-family: "Libre Baskerville";
+    font-family: "Sail", cursive;
 }
+
 body {
-    background: rgb(156,133,171);
-    background: linear-gradient(90deg, rgba(156,133,171,1) 0%, rgba(255,171,171,1) 50%, rgba(255,228,189,1) 100%);
-    font-family: "Lato";
+    background: rgb(35,134,122);
+    background: linear-gradient(90deg, rgba(35,134,122,1) 0%, rgba(35,54,134,1) 50%, rgba(74,13,115,1) 100%);
+    font-family: "Playfair Display", serif;
 }
 
-.nav-bar li {
-    display: inline;
-    float: left;
-}
-
-.nav-bar  {
+.spacer {
     width: 100%;
-    border: 1px solid black;
+    height: 95px;
+}
+
+.nav-bar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    background-color: black;
+    color: #EFF1ED;
+    margin-bottom: 105%;
+}
+
+.nav-bar a {
+      text-decoration: none;
+      color: #EFF1ED;
 }
 
 .nav-bar ul {
-    list-style-type: none;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    align-items: center;
+    display: flex;
 }
 
-.nav-bar li a {
-    display: block;
-    color: white;
-    text-align: center;
-    margin: 12px 10px;
-    /*padding: 20px 20px;*/
-    text-decoration: none;
+.nav-bar ul li {
+    list-style-type: square;
+    display: inline;
+    margin-left: 60px;
+    margin-bottom: 10px;
+    font-family: Lato, Verdana, "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    font-size: 23px;
 }
 
-/* Change the link color to #111 (black) on hover */
-.nav-bar li a:hover {
-    background-color: #111;
+.nav-bar .title {
+    margin-left: -50px;
 }
+
+/*.nav-bar ol {*/
+/*  position: absolute;*/
+/*  top: 50%;*/
+/*  right: 10px;*/
+/*  -ms-transform: translateY(-50%);*/
+/*  transform: translateY(-50%);*/
+/*}*/
+
+/*.nav-bar ol li {*/
+/*  list-style-type: none;*/
+/*  font-size: 30px;*/
+/*  margin: 10px;*/
+/*}*/
