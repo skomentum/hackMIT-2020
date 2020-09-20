@@ -35,8 +35,8 @@ def generate_music(star_list):
 
     # gets pitches array from pitches function
     stars = pitches(star_list)
-    if (len(stars) > 500):
-        limit = 500
+    if len(stars) > 500:
+        limit = 100
     else:
         limit = len(stars)
     for n in range(limit):
@@ -46,7 +46,7 @@ def generate_music(star_list):
         # Generate a sine tone with frequency 200 * n
         gen = Sine(notesList[stars[n]])
         # Optional: change the duration of the sounds based on how bright the star is
-
+        """
         if 0 <= brightness < 1:
             time = 200
         elif 1 <= brightness < 2:
@@ -61,6 +61,7 @@ def generate_music(star_list):
             time = 300
         elif 6 <= brightness < 7:
             time = 300
+            """
 
         # AudioSegment with duration 200ms, gain -3
         sine = gen.to_audio_segment(duration=time).apply_gain(-3)
@@ -69,20 +70,20 @@ def generate_music(star_list):
         # Changes the volume based on the brightness of the star
 
         if 0 <= brightness < 1:
-            sine += 60
+            sine += 10
         elif 1 <= brightness < 2:
-            sine += 40
+            sine += 9
         elif 2 <= brightness < 3:
-            sine += 20
+            sine += 8
         elif 3 <= brightness < 4:
-            sine = sine
+            sine += 7
         elif 4 <= brightness < 5:
-            sine -= 20
+            sine += 6
         elif 5 <= brightness < 6:
-            sine -= 40
+            sine += 5
         elif 6 <= brightness < 7:
-            sine -= 60
+            sine +=4
         # Append the sine to our result
         result += sine
     # save the result as an mp3 file
-    result.export("./music.mp3", format="mp3")
+    result.export("./static/music.mp3", format="mp3")

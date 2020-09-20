@@ -39,6 +39,11 @@
         <div class="spacer">
             &nbsp;
         </div>
+
+        <audio id="song">
+            <source src="../static/music.mp3" type="audio/mpeg">
+        </audio>
+        <button onclick="playAudio()" type="button">Play Audio</button>
     </div>
 
         <script>
@@ -100,6 +105,12 @@
                     ctx.fillRect(star[1] - radius, star[2] - radius, 2 * radius, 2 * radius);
                 }
 
+            }
+            var x = document.getElementById("song");
+
+            function playAudio() {
+              x.play();
+              console.log('stinky');
             }
         </script>
 
