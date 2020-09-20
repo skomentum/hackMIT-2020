@@ -60,8 +60,6 @@ def get_stars(zip_code, date_utc):
     return transform_stars(bright)
 
 
-
-
 def transform_stars(df):
     """
     :param df:  dataframe containing bright stars
@@ -97,5 +95,6 @@ def transform_stars(df):
 
         if inserted == 0: # curr has not been inserted in out yet - will be inserted at the end
             out.append([row[0], coords.x, coords.y])
-
+    print(orig)
+    print(out)
     return out
