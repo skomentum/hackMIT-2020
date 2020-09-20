@@ -58,6 +58,8 @@ def get_stars(zip_code, date_utc) -> list:
     ts = load.timescale()
     t = ts.utc(2020, 12, 20)                         # TODO set the date here
 
+    df = df[df['ra_degrees'].notnull()]         # remove nulls values
+
     bright = df[df['magnitude'] <= 5.5]                 # Prevent apparent magnitude from being greater than 5.5
     bright_stars = api.Star.from_dataframe(bright)
 
@@ -93,4 +95,4 @@ def get_stars(zip_code, date_utc) -> list:
 
         if not inserted:  # curr has not been inserted in sorted_list yet - will be inserted at the end (x is largest)
             sorted_list.append(orig[i])
-    return ""           # TODO fix return value once function can be called correctly
+    return sorted_list
