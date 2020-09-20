@@ -2,16 +2,24 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-{#    TODO: change title#}
-    <title>Stargazer - Home</title>
-    <script type=text/javascript src="{{url_for('static', filename='js/main.js')}}"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename= 'css/main.css') }}">
+    <title>Title</title>
+    <link rel="stylesheet" href="../static/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <script src="../static/main.js"></script>
 </head>
 <body>
-    <ul class="nav-bar">
-        <li><a href="/">Home</a></li>
-        <li><a href="/about/">About</a></li>
-    </ul>
+    <div class="nav-bar">
+        <!--    TODO: change the title! -->
+        <ul>
+            <li><span class="title">Stargazer</span></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about/">About</a></li>
+        </ul>
+    </div>
+
+    <p id="body">This is a paragraph example</p>
+
     <form class="position">
         <label for="zipcode">Enter your zip code:</label><br>
         <input type="text" id="zipcode" name="zipcode" placeholder="12345">
