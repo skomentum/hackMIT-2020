@@ -39,6 +39,7 @@
         <div class="spacer">
             &nbsp;
         </div>
+    </div>
 
         <script>
             async function drawStars() {
@@ -98,8 +99,11 @@
                     ctx.fillStyle = grd;
                     ctx.fillRect(star[1] - radius, star[2] - radius, 2 * radius, 2 * radius);
                 }
+                     
+                new Audio('./tmp/music.mp3').play()
+
             }
         </script>
-    </div>
+
 </body>
 </html>

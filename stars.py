@@ -59,7 +59,6 @@ def get_stars(zip_code, date_utc) -> list:
     t = ts.utc(2020, 12, 20)                         # TODO set the date here
 
     df = df[df['ra_degrees'].notnull()]         # remove nulls values
-
     bright = df[df['magnitude'] <= 5.5]                 # Prevent apparent magnitude from being greater than 5.5
     bright_stars = api.Star.from_dataframe(bright)
 
