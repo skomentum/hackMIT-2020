@@ -1,6 +1,6 @@
 from flask import *  # import flask
 from stars import *
-import requests
+import music
 
 app = Flask(__name__)  # create an app instance
 
@@ -20,7 +20,8 @@ def get_star_data():
     zip_code = request.args.get("zipcode")
     date = request.args.get("date")
     star_data = get_stars(zip_code, date)
-    return render_template("index.html", data=star_data)
+    song = music.generate_music(star_data)
+    return render_template("index.html", data=star_data, song=song)
 
 
 if __name__ == "__main__":  # on running python app.py
