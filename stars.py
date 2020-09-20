@@ -27,7 +27,8 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from skyfield import almanac, api, data
 import astropy
-
+from astropy import units as u
+from astropy.coordinates import SkyCoord
 
 def get_stars(zip_code, date_utc):
     """
@@ -59,15 +60,42 @@ def get_stars(zip_code, date_utc):
     return transform_stars(bright)
 
 
+
+
 def transform_stars(df):
     """
     :param df:  dataframe containing bright stars
     :return:    returns a two-dimensional list
                     [magnitude, ra_degrees, dec_degrees]
+            will be [magnitude, x-coord, y-coord]
     """
     # Remove additional data from the star file
     df = df.drop(columns=['parallax_mas', 'ra_mas_per_year', 'dec_mas_per_year', 'ra_hours', 'epoch_year'])
-    out = []
+    orig = [] # list with original astro coords
+    out = [] # list with sorted cartesian coords that will be returned
     for row_label, row in df.iterrows():
-        out.append([row[0], row[1], row[2]])
+        # orig.append([row[0], row[1], row[2]])
+        coords = SkyCoord(row[1], row[2])
+
+        # how do I simplify this to just x and y? and manipulate row[1] and row[2] ??
+        coords = SkyCoord(x=1, y=2, unit='kpc', representation_type='cartesian')
+            # output of c (from website): < SkyCoord(ICRS): (x, y, z) in kpc (1., 2., 3.) >
+        # put c.x and c.y in new list entry?
+        orig.append([row[0], coords.x, coords.y])
+        curr = coords.x
+
+        # now put list in order of x-coord!
+        n = 0
+        inserted = 0
+        while n < len(out) and inserted == 0:
+            if  curr <= out[n][1]:
+                # shift items after index n and insert curr at n
+                out.insert(n, [row[0], coords.x, coords.y])
+                inserted = 1
+            else:
+                n += 1
+
+        if inserted == 0: # curr has not been inserted in out yet - will be inserted at the end
+            out.append([row[0], coords.x, coords.y])
+
     return out
