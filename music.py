@@ -35,7 +35,11 @@ def generate_music(star_list):
 
     # gets pitches array from pitches function
     stars = pitches(star_list)
-    for n in range(len(stars)):
+    if (len(stars) > 500):
+        limit = 500
+    else:
+        limit = len(stars)
+    for n in range(limit):
         # shifts values over 1.44 so that the min is 0 and the max is 22.44
         time = 200  # default note duration in case it doesn't reach an "if" statement
         brightness = float(star_list[n][0]) + 1.44
@@ -45,17 +49,17 @@ def generate_music(star_list):
 
         if 0 <= brightness < 1:
             time = 200
-        if 1 <= brightness < 2:
+        elif 1 <= brightness < 2:
             time = 200
-        if 2 <= brightness < 3:
+        elif 2 <= brightness < 3:
             time = 200
-        if 3 <= brightness < 4:
+        elif 3 <= brightness < 4:
             time = 300
-        if 4 <= brightness < 5:
+        elif 4 <= brightness < 5:
             time = 300
-        if 5 <= brightness < 6:
+        elif 5 <= brightness < 6:
             time = 300
-        if 6 <= brightness < 7:
+        elif 6 <= brightness < 7:
             time = 300
 
         # AudioSegment with duration 200ms, gain -3
@@ -66,22 +70,19 @@ def generate_music(star_list):
 
         if 0 <= brightness < 1:
             sine += 60
-        if 1 <= brightness < 2:
+        elif 1 <= brightness < 2:
             sine += 40
-        if 2 <= brightness < 3:
+        elif 2 <= brightness < 3:
             sine += 20
-        if 3 <= brightness < 4:
+        elif 3 <= brightness < 4:
             sine = sine
-        if 4 <= brightness < 5:
+        elif 4 <= brightness < 5:
             sine -= 20
-        if 5 <= brightness < 6:
+        elif 5 <= brightness < 6:
             sine -= 40
-        if 6 <= brightness < 7:
+        elif 6 <= brightness < 7:
             sine -= 60
         # Append the sine to our result
         result += sine
-    # Play the result
-    play(result)
     # save the result as an mp3 file
-    result.export("./tmp/music.mp3", format="mp3")
-    return send_file("./tmp/music.mp3")
+    result.export("./music.mp3", format="mp3")
