@@ -28,7 +28,7 @@ for n in range(4, 8):
 
     if 21 <= brightness < 22:
         sine = sine
-    if (22 <= brightness < 23):
+    if 22 <= brightness < 23:
         sine = sine + 10
     if 23 <= brightness < 24:
         sine = sine + 20
