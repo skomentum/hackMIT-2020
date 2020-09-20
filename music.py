@@ -43,25 +43,18 @@ def music(starList):
         #Optional: change the duration of the sounds based on how bright the star is
 
         if brightness >= 0 and brightness < 1:
-
             time = 200
         if brightness >= 1 and brightness < 2:
-
             time = 200
         if brightness >= 2 and brightness < 3:
-
             time = 200
         if brightness >= 3 and brightness < 4:
-
             time = 300
         if brightness >= 4 and brightness < 5:
-
             time = 300
         if brightness >= 5 and brightness < 6:
-
             time = 300
         if brightness >=6 and brightness <7:
-
             time = 300
 
         # AudioSegment with duration 200ms, gain -3
@@ -72,25 +65,18 @@ def music(starList):
 
         if brightness >= 0 and brightness < 1:
             sine += 60
-
         if brightness >= 1 and brightness < 2:
             sine += 40
-
         if brightness >= 2 and brightness < 3:
             sine += 20
-
         if brightness >= 3 and brightness < 4:
             sine = sine
-
         if brightness >= 4 and brightness < 5:
             sine -= 20
-
         if brightness >= 5 and brightness < 6:
             sine -= 40
-
         if brightness >=6 and brightness <7:
             sine -= 60
-
         # Append the sine to our result
         result += sine
     # Play the result
