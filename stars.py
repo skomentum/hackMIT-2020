@@ -21,6 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
+import errno
+import os
 
 import numpy as np
 import pandas as pd
@@ -33,20 +35,27 @@ from astropy.coordinates import SkyCoord
 from skyfield.starlib import Star
 
 
-def get_stars(zip_code, date_utc):
+def get_stars(zip_code, date_utc) -> list:
     """
+    :rtype: list
     :param zip_code:  user zip code or coordinates
     :param date_utc:  current time in UTC
     :return:          returns a df of the bright stars
     """
-    load = api.Loader('./data')     # puts the data in the specified directory
+    load = api.Loader('./tmp/data')
+
     manhattan_beach = api.Topos('33.881519 S', '118.388177 W')      # TODO change location
 
     ephemeris = load('de421.bsp')   # download JPL ephemeris
     earth = ephemeris['earth']
 
+
     with load.open(data.hipparcos.URL) as f:
         df = data.hipparcos.load_dataframe(f)
+
+    t = ts.now()  # date is today
+
+    bright = df[df['magnitude'] <= 5.5]  # don't know what this does tbh
 
     ts = load.timescale()
     t = ts.utc(2020, 12, 20)                         # TODO set the date here
