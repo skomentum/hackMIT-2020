@@ -18,14 +18,20 @@
         </ul>
     </div>
 
-    <p id="body">This is a paragraph example</p>
+    <div id="outer">
+        <div id="inputs">
+            <form class="position">
+                <label for="zipcode">Enter your zip code:</label><br>
+                <input type="text" id="zipcode" name="zipcode" placeholder="12345"><br>
+                <label for="date">Enter your date:</label><br>
+                <input type="date" id="date" name="date"><br>
+                <input type="submit" value="Generate music">
+            </form>
+        </div>
 
-    <form class="position">
-        <label for="zipcode">Enter your zip code:</label><br>
-        <input type="text" id="zipcode" name="zipcode" placeholder="12345">
-        <input type="submit" value="Generate music">
-    </form>
-
-    <canvas id="stars" width="800" height="450" style="border:1px solid #0d0d0d;"></canvas>
+        <div id="canvas">
+            <canvas id="stars"></canvas>
+        </div>
+    </div>
 </body>
 </html>
