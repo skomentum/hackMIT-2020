@@ -40,3 +40,23 @@ body {
 .nav-bar li a:hover {
     background-color: #111;
 }
+
+#outer {
+    width: 100%;
+    height: 60%;
+}
+
+.position {
+    text-align: center;
+}
+
+#canvas {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 2em;
+}
+
+#stars {
+    width: 90% !important;
+    height: 50% !important;
+}
