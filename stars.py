@@ -39,27 +39,21 @@ def get_stars(zip_code, date_utc):
     :param date_utc:  current time in UTC
     :return:          returns a df of the bright stars
     """
-    load = api.Loader('./data')     # put the data here
-    manhattan_beach = api.Topos('33.881519 S', '118.388177 W')      # example location
+    load = api.Loader('./data')     # puts the data in the specified directory
+    manhattan_beach = api.Topos('33.881519 S', '118.388177 W')      # TODO change location
 
     ephemeris = load('de421.bsp')   # download JPL ephemeris
     earth = ephemeris['earth']
 
-    ts = load.timescale()
-    t = ts.utc(2001, 1, 1)            # date is today
-
     with load.open(data.hipparcos.URL) as f:
         df = data.hipparcos.load_dataframe(f)
 
-    barnards_star = Star.from_dataframe(df.loc[87937])
-
-    astrometric = earth.at(t).observe(barnards_star)
-    ra, dec, distance = astrometric.radec()
+    ts = load.timescale()
+    t = ts.utc(2020, 12, 20)                         # TODO set the date here
 
     bright = df[df['magnitude'] <= 5.5]                 # Prevent apparent magnitude from being greater than 5.5
     bright_stars = api.Star.from_dataframe(bright)
 
-    t = ts.now()    # change the date here
     astrometric = earth.at(t).observe(bright_stars)
     ra, dec, distance = astrometric.radec()
 
@@ -78,19 +72,18 @@ def get_stars(zip_code, date_utc):
     for i in range(len(ra_array)):
         orig.append([apparent_magnitude_array[i], ra_array[i], dec_array[i], distance_array[i]])
 
-    out = []
+    sorted_list = []
     for i in range(len(orig)):
         n = 0
         inserted = False
-        while n < len(out) and not inserted:
-            if orig[i][2] <= out[n][2]:
+        while n < len(sorted_list) and not inserted:
+            if orig[i][2] <= sorted_list[n][2]:
                 # shift items after index n and insert curr at n
-                out.insert(n, orig[i])
+                sorted_list.insert(n, orig[i])
                 inserted = True
             else:
                 n += 1
 
-        if not inserted:  # curr has not been inserted in out yet - will be inserted at the end (x is largest)
-            out.append(orig[i])
-
-    return out
+        if not inserted:  # curr has not been inserted in sorted_list yet - will be inserted at the end (x is largest)
+            sorted_list.append(orig[i])
+    return ""           # TODO fix return value once function can be called correctly
