@@ -4,12 +4,12 @@ window.onload = function () {
 
 const starList = [
     [0, 40, 50],
-    [22.44, 80, 120],
-    [14, 400, 20],
-    [7, 600, 300]
+    [6.94, 80, 120],
+    [4, 400, 20],
+    [2, 600, 300]
 ];
 
-async function drawStars() {
+async function drawStars(data) {
     let canvas = document.getElementById("stars");
     let ctx = canvas.getContext("2d");
 
@@ -23,7 +23,7 @@ async function drawStars() {
         // create a star
         let star = starList[starIndex];
 
-        let radius = 25; // max value of brightness
+        let radius = 12; // max value of brightness
         let grd = ctx.createRadialGradient(star[1], star[2], 1, star[1], star[2], Math.pow(radius - star[0], .75));
         grd.addColorStop(0, "white");
         grd.addColorStop(1, "black");
