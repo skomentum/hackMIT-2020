@@ -71,6 +71,7 @@ def transform_stars(df):
                     [magnitude, ra_degrees, dec_degrees]
     """
     # Remove additional data from the star file
+    df = df[df['ra_degrees'].notnull()]
     df = df.drop(columns=['parallax_mas', 'ra_mas_per_year', 'dec_mas_per_year', 'ra_hours', 'epoch_year'])
     out = []
     for row_label, row in df.iterrows():
