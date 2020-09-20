@@ -21,6 +21,8 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 """
+import errno
+import os
 
 import numpy as np
 import pandas as pd
@@ -29,25 +31,28 @@ from skyfield import almanac, api, data
 import astropy
 
 
-def get_stars(zip_code, date_utc):
+def get_stars(zip_code, date_utc) -> list:
     """
+    :rtype: list
     :param zip_code:  user zip code or coordinates
     :param date_utc:  current time in UTC
     :return:          returns a df of the bright stars
     """
-    load = api.Loader('./data')     # put the data here
-    manhattan_beach = api.Topos('33.881519 N', '118.388177 W')      # example location
+
+    load = api.Loader('./tmp/data')
+    # put the data here
+    manhattan_beach = api.Topos('33.881519 N', '118.388177 W')  # example location
 
     ts = load.timescale()
-    ephemeris = load('de421.bsp')   # download JPL ephemeris
+    ephemeris = load('de421.bsp')  # download JPL ephemeris
 
     with load.open(data.hipparcos.URL) as f:
         df = data.hipparcos.load_dataframe(f)
 
     earth = ephemeris['earth']
-    t = ts.now()            # date is today
+    t = ts.now()  # date is today
 
-    bright = df[df['magnitude'] <= 5.5]     # don't know what this does tbh
+    bright = df[df['magnitude'] <= 5.5]  # don't know what this does tbh
     bright_stars = api.Star.from_dataframe(bright)
 
     t = ts.now()
