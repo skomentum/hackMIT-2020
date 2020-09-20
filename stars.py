@@ -70,12 +70,30 @@ def get_stars(zip_code, date_utc):
     dec_array = dec.degrees.tolist()
     distance_array = distance.au.tolist()
 
-    # grab magnitudes of stars
-    print(bright.describe())
+    apparent_magnitude_array = []
 
-    print(ra_array)
-    print(dec_array)
-    print(distance_array)
+    for row_label, row in bright_stars.iterrows():
+        # grab magnitudes of stars
+        apparent_magnitude_array.append(row[0])
+
+    orig = []
+    out = []
+    for i in range (len(ra_array)):
+        orig.append([apparent_magnitude_array[i],ra_array[i],dec_array[i],distance_array[i]])
+        n = 0
+        inserted = 0
+        while n < len(out) and inserted == 0:
+            if row[1] <= out[n][1]:
+                # shift items after index n and insert curr at n
+                out.insert(n, [row[0], row[1], row[2]])
+                inserted = 1
+            else:
+                n += 1
+
+        if inserted == 0:  # curr has not been inserted in out yet - will be inserted at the end
+            out.append([row[0], row[1], row[2]])
+
+    print(out)
 
     return transform_stars(bright)
 
@@ -103,7 +121,7 @@ def transform_stars(df):
             else:
                 n += 1
 
-        if inserted == 0:               # curr has not been inserted in out yet - will be inserted at the end
+        if inserted == 0:       # curr has not been inserted in out yet - will be inserted at the end
             out.append([row[0], row[1], row[2]])
 
     print(out)
