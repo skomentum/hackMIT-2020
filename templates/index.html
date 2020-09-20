@@ -43,12 +43,44 @@
             let height = canvas.height;
             ctx.fillRect(0, 0, width, height);
 
-            var starList = JSON.parse('{{ data }}');
+            let starList = JSON.parse('{{ data }}');
+
+            let minX = starList[0][1];
+            let minY = starList[0][2];
+            let maxX = 0.0;
+            let maxY = 0.0;
+            for (star in starList) {
+                if (star[1] < minX) {
+                    minX = star[1]
+                } else if (star[1] > maxX) {
+                    maxX = star[1]
+                }
+
+                if (star[2] < minY) {
+                    minY = star[2]
+                } else if (star[2] > maxY) {
+                    maxY = star[2]
+                }
+            }
+
+            console.log(starList.length);
+
+            let diffX = maxX - minX;
+            let diffY = maxY - minY;
+
+            let scaleX = 40/diffX;
+            let scaleY = 900/diffY;
+
+            console.log(scaleX);
 
             // loop through the stars
             for (let starIndex = 0; starIndex < starList.length; starIndex++) {
                 // create a star
                 let star = starList[starIndex];
+                star[1] = star[1]*scaleX;
+                star[2] = star[2]*scaleY;
+                {#console.log(star[1]);#}
+                {#console.log(star[2]);#}
 
                 let radius = 12; // max value of brightness
                 let grd = ctx.createRadialGradient(star[1], star[2], 1, star[1], star[2], Math.pow(radius - star[0], .75));
