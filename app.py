@@ -1,4 +1,5 @@
 from flask import *                 # import flask
+from stars import *
 app = Flask(__name__)               # create an app instance
 
 
@@ -22,6 +23,11 @@ def login():
 @app.route('/about/')
 def about():
     return render_template('about.html')
+
+
+@app.route('/get_star_data')
+def get_star_data():
+    return get_stars(1, 2)
 
 
 if __name__ == "__main__":          # on running python app.py
