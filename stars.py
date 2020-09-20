@@ -55,8 +55,6 @@ def get_stars(zip_code, date_utc):
 
     astrometric = earth.at(t).observe(barnards_star)
     ra, dec, distance = astrometric.radec()
-    print(ra)
-    print(dec)
 
     bright = df[df['magnitude'] <= 5.5]                 # Prevent apparent magnitude from being greater than 5.5
     bright_stars = api.Star.from_dataframe(bright)
@@ -72,57 +70,27 @@ def get_stars(zip_code, date_utc):
 
     apparent_magnitude_array = []
 
-    for row_label, row in bright_stars.iterrows():
+    for row_label, row in bright.iterrows():
         # grab magnitudes of stars
         apparent_magnitude_array.append(row[0])
 
     orig = []
+    for i in range(len(ra_array)):
+        orig.append([apparent_magnitude_array[i], ra_array[i], dec_array[i], distance_array[i]])
+
     out = []
-    for i in range (len(ra_array)):
-        orig.append([apparent_magnitude_array[i],ra_array[i],dec_array[i],distance_array[i]])
+    for i in range(len(orig)):
         n = 0
-        inserted = 0
-        while n < len(out) and inserted == 0:
-            if row[1] <= out[n][1]:
+        inserted = False
+        while n < len(out) and not inserted:
+            if orig[i][2] <= out[n][2]:
                 # shift items after index n and insert curr at n
-                out.insert(n, [row[0], row[1], row[2]])
-                inserted = 1
+                out.insert(n, orig[i])
+                inserted = True
             else:
                 n += 1
 
-        if inserted == 0:  # curr has not been inserted in out yet - will be inserted at the end
-            out.append([row[0], row[1], row[2]])
+        if not inserted:  # curr has not been inserted in out yet - will be inserted at the end (x is largest)
+            out.append(orig[i])
 
-    print(out)
-
-    return transform_stars(bright)
-
-
-def transform_stars(df):
-    """
-    Transform the dataset
-    :param df:  dataframe containing bright stars
-    :return:    returns a two-dimensional list
-                    [magnitude, ra_degrees, dec_degrees]
-            will be [magnitude, x-coord, y-coord]
-    """
-    # Remove additional data from the star file
-    df = df.drop(columns=['parallax_mas', 'ra_mas_per_year', 'dec_mas_per_year', 'ra_hours', 'epoch_year'])
-
-    out = []    # list with sorted cartesian coords that will be returned
-    for row_label, row in df.iterrows():
-        n = 0
-        inserted = 0
-        while n < len(out) and inserted == 0:
-            if row[1] <= out[n][1]:
-                # shift items after index n and insert curr at n
-                out.insert(n, [row[0], row[1], row[2]])
-                inserted = 1
-            else:
-                n += 1
-
-        if inserted == 0:       # curr has not been inserted in out yet - will be inserted at the end
-            out.append([row[0], row[1], row[2]])
-
-    print(out)
-    return ""
+    return out
